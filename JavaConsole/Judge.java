@@ -26,6 +26,27 @@ public class Judge {
 	/** 横に置けるかどうか判定 */
 	private static boolean placeableW(int i, int j){
 		System.out.println(square[i][j] + "(" + i + "," + j + ")について横判定");
+		try{
+			if(square[i][++j] == turn){//右隣が同じ色 → false
+				System.out.print("[" + i + "][" + ++j + "]" + " == " + turn)
+				return false;}
+			while(square[i][j+1] != 0){//右隣が空白でないとき
+				if(square[i][j+1] == turn){//対となる同色があった
+					System.out.print("[" + i + "][" + j+1 + "]" + " == " + turn)
+					return true;
+				}else if(square[i][j+1] == 0){//対がないまま空白に辿り着いた
+					System.out.print("[" + i + "][" + j+1 + "]" + " == " + 0)
+					return false;
+				}else{//相手の色が続いている
+					System.out.print("[" + i + "][" + j+1 + "]" + " != " + turn + "(else)")
+					j++;
+					continue;
+				}
+			}
+		}catch(IndexOutOfBoundsException){
+			System.out.print("catch ")
+			return false;
+		}
 
 		if(square[i][j+1] == turn)//右隣が同じ色 → false
 		return false;
