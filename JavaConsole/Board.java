@@ -7,19 +7,19 @@ package javaconsole;
  */
 public class Board {
 	/** 手番 */
-	int turn = 0;
+	int turn = 1;
 
-	/** 盤面の状態(空白=null, 黒=0, 白=1) */
+	/** 盤面の状態(空白=0, 黒=1, 白=2) */
 	int[][] square = new int[4][4];
 
 	//コンストラクタ（初期化）
 	public Board(){
 		//●を配置
-		square[1][1] = 0;
-		square[2][2] = 0;
+		square[1][1] = 1;
+		square[2][2] = 1;
 		//○を配置
-		square[1][2] = 1;
-		square[2][1] = 1;
+		square[1][2] = 2;
+		square[2][1] = 2;
 	}
 
 	//先手を変更できるコンストラクタ
@@ -37,7 +37,7 @@ public class Board {
 		int count = 0;
 		for(int[] a : square){
 			for(int b : a){
-				if(b == 0){
+				if(b == 1){
 					count++;
 				}
 			}
