@@ -1,3 +1,4 @@
+package JavaConsole;
 /**
  * 盤面クラス
  * 4*4サイズの盤面を生成する。

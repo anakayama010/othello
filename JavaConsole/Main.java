@@ -1,3 +1,4 @@
+package JavaConsole;
 /**
  * ゲーム進行クラス
  */
