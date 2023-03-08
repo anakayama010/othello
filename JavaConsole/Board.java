@@ -1,4 +1,4 @@
-package JavaConsole;
+package javaconsole;
 
 /**
  * 盤面クラス

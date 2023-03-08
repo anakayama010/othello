@@ -1,4 +1,4 @@
-package JavaConsole;
+package javaconsole;
 
 /**
  * 判定するクラス

@@ -1,4 +1,4 @@
-package JavaConsole;
+package javaconsole;
  /*
  * マスの状態メモ
  * 何もなし = null
