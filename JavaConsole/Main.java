@@ -1,3 +1,4 @@
+package JavaConsole;
  /*
  * マスの状態メモ
  * 何もなし = null
@@ -5,10 +6,6 @@
  * 白 ○ = 1,
  * 置くことができる ◌ = 2
  */
-
-
-
-import JavaConsole.Board;
 
 /**
  * ゲーム進行クラス
