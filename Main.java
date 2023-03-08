@@ -3,9 +3,20 @@
  */
 public class Main {
 	public static void main(String[] args){
-		final String[] STATUS = {"●", "○", "◌"}; //[●, ○, ◌]
 
-		//ゲームを初期化する
-		GameBoard banmen = new GameBoard();
+		/**
+		 * マスの状態を表す配列
+		 * 何もなし = null
+		 * 黒 ● = 0,
+		 * 白 ○ = 1,
+		 * 置くことができる ◌ = 2
+		 */
+		final String[] STATUS = {"●", "○", "◌"}; //[●=0, ○=1, ◌=2]
+
+
+		//ゲームを初期化して生成
+		Board banmen = new Board();
+
+		
 	}
 }
