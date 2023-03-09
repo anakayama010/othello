@@ -23,6 +23,7 @@ public class Judge {
 		return place;
 	}
 
+
 	/** 横に置けるかどうか判定 */
 	private static boolean placeableW(int i, int j){
 		System.out.println(square[i][j] + "(" + i + "," + j + ")について横判定");
