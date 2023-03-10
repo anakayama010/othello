@@ -1,5 +1,7 @@
 package javaconsole;
 
+import java.util.ArrayList;
+
 /**
  * 盤面クラス
  * 4*4サイズの盤面を生成する。
@@ -14,10 +16,10 @@ public class Board {
 
 	//コンストラクタ（初期化）
 	public Board(){
-		//●を配置
+		//●(1)を配置
 		square[1][1] = 1;
 		square[2][2] = 1;
-		//○を配置
+		//○(2)を配置
 		square[1][2] = 2;
 		square[2][1] = 2;
 	}
@@ -89,5 +91,20 @@ public class Board {
 		}
 		System.out.println("");//確認用
 		return isNull;
+	}
+
+	/** コマを置き、裏返せるものを裏返す */
+	public void placeDisk(Board board, int[] act){
+		ArrayList<ArrayList> reversible = Judge.reversible(board, act);
+		if(reversible.isEmpty()){
+			System.out.println("そこは置けません");
+		}else{
+			square[act[0]][act[1]] = turn;
+		for(int i=0; i < reversible.size(); i++){
+			ArrayList<Integer> a = reversible.get(i);
+			square[a.get(0)][ a.get(1)] = turn;
+		}
+		}
+		
 	}
 }
