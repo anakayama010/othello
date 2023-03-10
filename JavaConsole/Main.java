@@ -7,6 +7,9 @@ package javaconsole;
  * 置くことができる ◌ = 3
  */
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * ゲーム進行クラス
  */
@@ -19,8 +22,20 @@ public class Main {
 		/** 動作確認の実行 */
 		methodCheck(board);
 
+		
 
 
+	}
+
+	/** プレイヤーのマス選択を待つメソッド */
+	public static int[] waitAction(){
+		Scanner sc = new Scanner (System.in);
+		int[] act = new int[2];
+		System.out.println("縦座標を入力してください（０～３）");
+		act[0] = sc.nextInt();
+		System.out.println("横座標を入力してください（０～３）");
+		act[1] = sc.nextInt();
+		return act;
 	}
 
 
@@ -49,6 +64,15 @@ public class Main {
 		//Board.isThereNull()
 		System.out.println("isNull : " + board.isThereNull());
 		//Judge.placeable()
-		System.out.println(Judge.placeable(board));
-	} 
+		ArrayList<ArrayList> placeable = Judge.placeable(board);
+		if(placeable.isEmpty()){
+			System.out.println("null");
+		} else{
+			System.out.println(placeable);
+		}
+		//Main.waitAction()
+		int[] act = waitAction();
+		System.out.println("プレイヤーの選択 : [" + act[0] + ", " + act[1] + "]" );
+		
+	} 	
 }
