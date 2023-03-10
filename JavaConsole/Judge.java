@@ -39,7 +39,6 @@ public class Judge {
 		return places;
 	}
 
-
 	/** 右に置けるかどうか判定 */
 	private static boolean placeableR(int i, int j){
 
@@ -286,6 +285,7 @@ public class Judge {
 			return false;
 		}
 	}
+
 	/** 左上に置けるかどうか判定 */
 	private static boolean placeableLT(int i, int j){
 		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について左上を判定");
@@ -320,4 +320,68 @@ public class Judge {
 			return false;
 		}
 	}
+
+	/** 
+	 * actに置いた後、他に裏返せる場所を返すメソッド
+	 * @param	Board 盤面, int[] 置く場所
+	 * @return ArrayList<ArrayList> 裏返せる場所の一覧
+	 */
+	public static ArrayList<ArrayList> reversible(Board board, int[] act){
+		square = board.getBoard(); //現在の盤面
+		turn = board.getTurn(); //現在の手番
+		ArrayList<ArrayList> rebDisks = new ArrayList<>();//戻り値用　裏返せる場所一覧を入れる用
+		int i = act[0];
+		int j = act[1];
+		ArrayList<ArrayList> disks = new ArrayList<>();
+		disks = reversibleR(i, j);
+		rebDisks.add(disks);
+		System.out.println("rebDisks：" + rebDisks );
+		return rebDisks;
+	}
+	
+	/** 右方向に裏返せるか判定 */
+	public static ArrayList<ArrayList> reversibleR(int i, int j){
+		ArrayList<ArrayList> disks = new ArrayList<>();//裏返せる値の仮置き用
+		
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について右を判定");
+		if(square[i][j] == 0){//置ける場所であることを確認
+			try{
+				if(square[i][++j] == turn){//隣が同じ色 → false
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (隣が同じ色)");
+					return null;
+				}else{//隣が同じ色でない
+					while(square[i][j] != 0){//隣が空白でないとき
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (隣が相手の色)");
+						ArrayList<Integer> disk = new ArrayList<>();
+						disk.add(i);
+						disk.add(j);
+						System.out.println("disk：" + disk );
+						disks.add(disk);
+						System.out.println("disks：" + disks );
+						if(square[i][++j] == turn){//対となる同色があった
+							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+							System.out.println("disks：" + disks );
+							return disks;
+						}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がないまま空白)");
+							return null;
+						}else{//相手の色が続いている
+							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+							continue;
+						}
+					}
+					//隣が空白である
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (隣が空白)");
+					return null;
+				}
+			}catch(IndexOutOfBoundsException e){
+				System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+				return null;
+			}
+		}else{
+			System.out.println("(" + i + "," + j + ") == " + square[i][j] + " → (置けないマス)");
+			return null;
+		}
+	}
 }
+
