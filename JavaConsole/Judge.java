@@ -60,7 +60,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -97,7 +96,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -133,7 +131,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -169,7 +166,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -205,7 +201,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -241,7 +236,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -277,7 +271,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
@@ -312,7 +305,6 @@ public class Judge {
 							return false;
 						}else{//相手の色が続いている
 							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							j++;
 							continue;
 						}
 					}
