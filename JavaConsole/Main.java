@@ -73,6 +73,8 @@ public class Main {
 		//Main.waitAction()
 		int[] act = waitAction();
 		System.out.println("プレイヤーの選択 : [" + act[0] + ", " + act[1] + "]" );
+		//Judge.reversible()
+		System.out.println("裏返せる場所：" + Judge.reversible(board, act));
 		
 	} 	
 }
