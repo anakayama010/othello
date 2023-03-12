@@ -90,4 +90,9 @@ public class Board {
 		System.out.println("");//確認用
 		return isNull;
 	}
+
+	/** 指定した座標の色を手番の色に変更するメソッド */
+	public void changeDisk(int[] disk){
+		square[disk[0]][disk[1]] = turn;
+	}
 }
