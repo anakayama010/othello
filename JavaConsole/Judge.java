@@ -286,6 +286,7 @@ public class Judge {
 			return false;
 		}
 	}
+	
 	/** 左上に置けるかどうか判定 */
 	private static boolean placeableLT(int i, int j){
 		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について左上を判定");
@@ -320,4 +321,55 @@ public class Judge {
 			return false;
 		}
 	}
+
+	/** 裏返せるか判定し、裏返す */
+	public static void reverseDisks(Board board, int[] act){
+		square = board.getBoard();
+		turn = board.getTurn();
+		reverseDisksR(act[0], act[1]);
+	}
+
+	/** 右方向に判定し裏返す */
+	public static void reverseDisksR (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について右を判定");
+			try {
+				
+				if(square[i][++j] == turn){//裏返せない
+				}else if(square[i][j] == 0){//何もない
+				}else{//裏返せるかもしれない
+					
+
+				}
+			} catch (IndexOutOfBoundsException e) {
+				
+			}
+
+			try{
+				if(square[i][++j] == turn){//みぎが同じ色 → false
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+					return false;
+				}else{
+					while(square[i][j] != 0){//左上が空白でないとき
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+						if(square[--i][--j] == turn){//対となる同色があった
+							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+							return true;
+						}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+							return false;
+						}else{//相手の色が続いている
+							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+							continue;
+						}
+					}
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+					return false;
+				}
+			}catch(IndexOutOfBoundsException e){
+				System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+				return false;
+			}
+		
+	}
+
 }
