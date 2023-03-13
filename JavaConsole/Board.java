@@ -15,13 +15,11 @@ public class Board {
 	//コンストラクタ（初期化）
 	public Board(){
 		//●を配置
-		square[1][3] = 1;
-		square[3][1] = 1;
-		square[3][3] = 1;
+		square[1][1] = 1;
+		square[2][2] = 1;
 		//○を配置
 		square[1][2] = 2;
 		square[2][1] = 2;
-		square[2][2] = 2;
 	}
 
 	//先手を変更できるコンストラクタ

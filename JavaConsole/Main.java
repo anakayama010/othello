@@ -20,8 +20,61 @@ public class Main {
 		Board board = new Board();
 
 		/** 動作確認の実行 */
-		methodCheck(board);
+		//methodCheck(board);
 
+		//Board.getBoard()
+		int[][] square = board.getBoard();
+		for(int[] a : square){
+			System.out.print("[ ");
+			for(int b : a){
+				System.out.print(b + " ");
+			}
+			System.out.println("]");
+		}
+
+		while(board.isThereNull()){
+			System.out.println("【" + board.getTurn() + "】の手番です。");
+			System.out.print("置ける場所 ");
+			System.out.println(Judge.placeable(board));
+
+			//Main.waitAction()
+			int[] act = waitAction();
+
+			//judge.reverseDisks()
+			Judge.reverseDisks(board, act);
+			square = board.getBoard();
+			for(int[] a : square){
+				System.out.print("[ ");
+				for(int b : a){
+					System.out.print(b + " ");
+				}
+				System.out.println("]");
+			}
+
+			//Board.getBoard()
+			square = board.getBoard();
+			for(int[] a : square){
+				System.out.print("[ ");
+				for(int b : a){
+					System.out.print(b + " ");
+				}
+				System.out.println("]");
+			}
+
+			//Board.changeTurn()
+			board.changeTurn();
+		}
+
+		System.out.println("-----結果-----");
+		System.out.println("１（黒）" + board.getCountBlack() + "個");
+		System.out.println("２（白）" + board.getCountWhite() + "個");
+		if(board.getCountBlack() == board.getCountWhite()){
+			System.out.println("引き分け！");
+		}else if(board.getCountBlack() > board.getCountWhite()){
+			System.out.println("１（黒）の勝ち！");
+		}else{
+			System.out.println("２（白）の勝ち！");
+		}
 		
 
 
