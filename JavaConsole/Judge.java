@@ -326,70 +326,87 @@ public class Judge {
 	public static void reverseDisks(Board board, int[] act){
 		square = board.getBoard();
 		turn = board.getTurn();
+		board.changeDisk(act[0], act[1]);
+
 		//右上
 		ArrayList<Integer> possible = reverseDisksRT(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+		
 		//右
 		possible = reverseDisksR(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+
 		//右下
 		possible = reverseDisksRB(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+
 		//下
 		possible = reverseDisksB(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+
 		//左下
 		possible = reverseDisksLB(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+
 		//左
 		possible = reverseDisksL(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+
 		//左上
 		possible = reverseDisksLT(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
+
 		//上
 		possible = reverseDisksT(act[0], act[1]);
-		while(!possible.isEmpty()){//裏返すものがあるとき
+		while(possible != null){//裏返すものがあるとき
 			for(int i = 0; i < possible.size();){
 				board.changeDisk(possible.get(i++), possible.get(i++));
 			}
+			possible.clear();
+			break;
 		}
-		possible.clear();
 	}
 
 	/** 右上方向に判定し裏返す */
