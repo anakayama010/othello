@@ -57,7 +57,7 @@ public class Main {
 		//Board.getTurn()
 		System.out.println("Turn : " + board.getTurn());
 		//Board.changeTurn()
-		for(int i = 1; i <= 5; i++){
+		for(int i = 1; i <= 4; i++){
 			board.changeTurn();
 			System.out.println("AfterChange " + i + " Turn : " + board.getTurn());
 		}
@@ -73,6 +73,15 @@ public class Main {
 		//Main.waitAction()
 		int[] act = waitAction();
 		System.out.println("プレイヤーの選択 : [" + act[0] + ", " + act[1] + "]" );
-		
+		//judge.reverseDisks()
+		Judge.reverseDisks(board, act);
+		square = board.getBoard();
+		for(int[] a : square){
+			System.out.print("[ ");
+			for(int b : a){
+				System.out.print(b + " ");
+			}
+			System.out.println("]");
+		}
 	} 	
 }
