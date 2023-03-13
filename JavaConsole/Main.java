@@ -31,7 +31,7 @@ public class Main {
 			}
 			System.out.println("]");
 		}
-
+		
 		while(board.isThereNull()){
 			System.out.println("【" + board.getTurn() + "】の手番です。");
 			System.out.print("置ける場所 ");
@@ -42,16 +42,6 @@ public class Main {
 
 			//judge.reverseDisks()
 			Judge.reverseDisks(board, act);
-			square = board.getBoard();
-			for(int[] a : square){
-				System.out.print("[ ");
-				for(int b : a){
-					System.out.print(b + " ");
-				}
-				System.out.println("]");
-			}
-
-			//Board.getBoard()
 			square = board.getBoard();
 			for(int[] a : square){
 				System.out.print("[ ");
@@ -75,10 +65,8 @@ public class Main {
 		}else{
 			System.out.println("２（白）の勝ち！");
 		}
-		
-
-
 	}
+
 
 	/** プレイヤーのマス選択を待つメソッド */
 	public static int[] waitAction(){
@@ -92,7 +80,7 @@ public class Main {
 	}
 
 
-	/** 各種メソッドの動作確認を行うメソッド */
+	//各種メソッドの動作確認を行うメソッド
 	public static void methodCheck(Board board){
 		//Board.getBoard()
 		int[][] square = board.getBoard();

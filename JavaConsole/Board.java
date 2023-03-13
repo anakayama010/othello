@@ -75,9 +75,7 @@ public class Board {
 	public boolean isThereNull(){
 		boolean isNull = false;
 		for(int[] a : square){
-			System.out.print("[ ");//確認用
 			for(int b : a){
-				System.out.print(b + " ");//確認用
 				if(b == 0){
 					isNull = true;
 					break;
@@ -85,9 +83,7 @@ public class Board {
 			}
 			if(isNull)
 			break;
-			System.out.println("]");//確認用
 		}
-		System.out.println("");//確認用
 		return isNull;
 	}
 
