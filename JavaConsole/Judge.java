@@ -326,50 +326,343 @@ public class Judge {
 	public static void reverseDisks(Board board, int[] act){
 		square = board.getBoard();
 		turn = board.getTurn();
-		reverseDisksR(act[0], act[1]);
+		//右上
+		ArrayList<Integer> possible = reverseDisksRT(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//右
+		possible = reverseDisksR(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//右下
+		possible = reverseDisksRB(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//下
+		possible = reverseDisksB(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//左下
+		possible = reverseDisksLB(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//左
+		possible = reverseDisksL(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//左上
+		possible = reverseDisksLT(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+		//上
+		possible = reverseDisksT(act[0], act[1]);
+		while(!possible.isEmpty()){//裏返すものがあるとき
+			for(int i = 0; i < possible.size();){
+				board.changeDisk(possible.get(i++), possible.get(i++));
+			}
+		}
+		possible.clear();
+	}
+
+	/** 右上方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksRT (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について右上を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[--i][++j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[--i][++j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
 	}
 
 	/** 右方向に判定し裏返す */
-	public static void reverseDisksR (int i, int j){
+	public static ArrayList<Integer> reverseDisksR (int i, int j){
 		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について右を判定");
-			try {
-				
-				if(square[i][++j] == turn){//裏返せない
-				}else if(square[i][j] == 0){//何もない
-				}else{//裏返せるかもしれない
-					
-
-				}
-			} catch (IndexOutOfBoundsException e) {
-				
-			}
-
-			try{
-				if(square[i][++j] == turn){//みぎが同じ色 → false
-					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
-					return false;
-				}else{
-					while(square[i][j] != 0){//左上が空白でないとき
-						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
-						if(square[--i][--j] == turn){//対となる同色があった
-							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
-							return true;
-						}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
-							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
-							return false;
-						}else{//相手の色が続いている
-							System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
-							continue;
-						}
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[i][++j] == turn){//右が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず右が相手の色
+				while(square[i][j] != 0){//右が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[i][++j] == turn){//対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
 					}
-					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
-					return false;
 				}
-			}catch(IndexOutOfBoundsException e){
-				System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
-				return false;
+				//右が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
 			}
-		
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}
 	}
 
+	/** 右下方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksRB (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について右下を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[++i][++j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[++i][++j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
+	}
+
+	/** 下方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksB (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について下を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[++i][j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[++i][j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
+	}
+
+	/** 左下方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksLB (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について左下を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[++i][--j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[++i][--j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
+	}
+
+	/** 左方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksL (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について左を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[i][--j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[i][--j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
+	}
+
+	/** 左上方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksLT (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について左上を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[--i][--j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[--i][--j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
+	}
+
+	/** 上方向に判定し裏返す */
+	public static ArrayList<Integer> reverseDisksT (int i, int j){
+		System.out.println("[" + i + "," + j + "] " + square[i][j] + "について上を判定");
+		ArrayList<Integer> possible = new ArrayList<>();
+		try{
+			if(square[--i][j] == turn){//まず隣が同じ色 → false
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (同じ色)");
+				return null;
+			}else{//まず隣が相手の色
+				while(square[i][j] != 0){//さらに隣が空白でないとき
+					System.out.println("(" + i + "," + j + ") " + square[i][j] + " → loop (相手の色)");
+					possible.add(i);
+					possible.add(j);
+					if(square[--i][j] == turn){//さらに隣に対となる同色があった
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → true (対となる同色)");
+						return possible;
+					}else if(square[i][j] == 0){//対がないまま空白に辿り着いた
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (対がなく空白)");
+						return null;
+					}else{//相手の色が続いている
+						System.out.println("(" + i + "," + j + ") " + square[i][j] + " → continue (相手の色連続)");
+						continue;
+					}
+				}
+				//隣が空白
+				System.out.println("(" + i + "," + j + ") " + square[i][j] + " → false (空白)");
+				return null;
+			}
+		}catch(IndexOutOfBoundsException e){//枠外を検知
+			System.out.println("(" + i + "," + j + ") == catch → false (枠外判定)");
+			return null;
+		}	
+	}
+
+	
 }
