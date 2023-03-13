@@ -92,7 +92,7 @@ public class Board {
 	}
 
 	/** 指定した座標の色を手番の色に変更するメソッド */
-	public void changeDisk(int[] disk){
-		square[disk[0]][disk[1]] = turn;
+	public void changeDisk(int diski, int diskj){
+		square[diski][diskj] = turn;
 	}
 }
